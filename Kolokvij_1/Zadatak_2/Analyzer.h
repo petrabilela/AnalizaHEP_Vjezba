@@ -11,6 +11,12 @@
 #include <TROOT.h>
 #include <TChain.h>
 #include <TFile.h>
+#include <TLorentzVector.h>
+#include <TH2F.h>
+#include <TCanvas.h>
+
+
+using namespace std;
 
 // Header file for the classes stored in the TTree if any.
 #include "vector"
@@ -43,6 +49,12 @@ public :
    virtual void     Loop();
    virtual Bool_t   Notify();
    virtual void     Show(Long64_t entry = -1);
+   virtual void Plot();
+   private:
+   TCanvas *canvas;
+   TH2F *hist;
+   TLorentzVector electron, pozitron, Jpsi;
+   Long64_t entries;
 };
 
 #endif

@@ -41,3 +41,49 @@ void Analyzer::Loop()
       // if (Cut(ientry) < 0) continue;
    }
 }
+
+void Analyzer::Plot() {
+    
+
+    TCanvas* plotCanvas = new TCanvas();
+    plotCanvas->SetCanvasSize(900, 900);
+    TH2F* histogram = new TH2F("J/psi Mass vs dR", "J/psi Mass vs dR", 100, 2.0, 4.0, 100, 0.0, 1.5);
+
+
+    for (Long64_t i = 0; i < entries; i++) {
+        fChain->GetEntry(i);
+        TLorentzVector electron1, electron2, jpsi;
+	
+	
+        electron.SetPtEtaPhiM (ele_pt -> at (0), ele_eta -> at (0), ele_phi -> at (0), 0);
+	pozitron.SetPtEtaPhiM (ele_pt -> at (1), ele_eta -> at (1), ele_phi -> at (1), 0);
+	Jpsi = electron + pozitron;
+
+        jpsi = electron1 + electron2;
+
+        float dR = electron1.DeltaR(electron2);
+        histogram->Fill(jpsi.M(), dR);
+    }
+
+
+    plotCanvas->SetLeftMargin(0.15);
+    plotCanvas->SetBottomMargin(0.15);
+    plotCanvas->SetTitle("J/psi Mass vs dR");
+    histogram->Draw("COLZ");
+    histogram->SetStats(0);
+    histogram->GetXaxis()->SetTitle("J/psi Mass (GeV)");
+    histogram->GetYaxis()->SetTitle("dR");
+    histogram->GetXaxis()->SetLabelSize(0.04);
+    histogram->GetYaxis()->SetLabelSize(0.04);
+    histogram->SetFillColor(kRainBow);
+
+    plotCanvas->Print("Jpsi_mass_dR_histogram.pdf");
+    plotCanvas->Print("Jpsi_mass_dR_histogram.png");
+    plotCanvas->Print("Jpsi_mass_dR_histogram.root");
+
+    delete plotCanvas;
+    delete histogram;
+
+
+
+}
