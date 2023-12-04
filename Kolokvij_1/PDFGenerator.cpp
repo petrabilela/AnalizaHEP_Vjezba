@@ -14,7 +14,7 @@ void PDFGenerator::GenerateHistogram() {
     while (generatedCount < 1E5) {
         randomVal = -3 + 12 * static_cast<float>(rand()) / RAND_MAX;
         functionVal = (-randomVal * randomVal + 6 * randomVal + 27) / 288;
-        randomVal2 = -3 + 12 * static_cast<float>(rand())/RAND_MAX;; 
+        randomVal2 = static_cast<float>(rand())/RAND_MAX;; 
 
         if (randomVal2 < functionVal) {
             histogram->Fill(randomVal);
