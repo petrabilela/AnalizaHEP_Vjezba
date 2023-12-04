@@ -29,8 +29,8 @@ void PDFGenerator::GenerateHistogram() {
     plotCanvas->SetTitle("Generated Histogram");  
 
     histogram->Draw("HIST");                       
-    histogram->GetXaxis()->SetTitle("X-axis Title");
-    histogram->GetYaxis()->SetTitle("Y-axis Title");
+    histogram->GetXaxis()->SetTitle(" ");
+    histogram->GetYaxis()->SetTitle(" ");
     histogram->GetXaxis()->SetLabelSize(0.035);    
     histogram->GetYaxis()->SetLabelSize(0.035);    
     histogram->SetFillColor(kBlue);               
